@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Story App</string>
+    <string name="new_to_story">New to Story?</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="press_again_to_exit">Press again to exit</string>
+    <string name="person_with_paper_illustration">Person with paper illustration</string>
+    <string name="login_title">Hello, let\'s sign in</string>
+    <string name="login_message">Explore all of student\'s experience and story when learning in Dicoding, and of course you can also share your story too✍️</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register_title">Let\'s create an account</string>
+    <string name="register_message">New to this application? \nLet\'s create an account for you ✨</string>
+    <string name="full_name">Full name</string>
 </resources>

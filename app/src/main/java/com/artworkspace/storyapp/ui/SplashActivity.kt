@@ -1,4 +1,4 @@
-package com.artworkspace.storyapp
+package com.artworkspace.storyapp.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,7 +10,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Intent(this, MainActivity::class.java).also {
+        Intent(this, AuthActivity::class.java).also {
             startActivity(it)
             finish()
         }

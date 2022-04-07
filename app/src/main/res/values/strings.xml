@@ -13,4 +13,6 @@
     <string name="register_title">Let\'s create an account</string>
     <string name="register_message">New to this application? \nLet\'s create an account for you ✨</string>
     <string name="full_name">Full name</string>
+    <string name="et_email_error_message">Email address is not valid</string>
+    <string name="et_password_error_message">Passwords must be at least 6 characters</string>
 </resources>

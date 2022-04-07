@@ -9,7 +9,6 @@ import android.util.AttributeSet
 import android.util.Patterns
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
 import com.artworkspace.storyapp.R
 
 class EmailEditText : AppCompatEditText {

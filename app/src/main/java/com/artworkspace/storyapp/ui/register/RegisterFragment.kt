@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.FragmentRegisterBinding
 import com.google.android.material.snackbar.Snackbar
@@ -36,20 +37,27 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.btnLogin.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_registerFragment_to_loginFragment)
-        )
-
-
-        binding.btnRegister.setOnClickListener {
-            handleRegister()
-        }
+        setActions()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * Set actions listener on the UI
+     */
+    private fun setActions() {
+        binding.apply {
+            btnLogin.setOnClickListener(
+                Navigation.createNavigateOnClickListener(R.id.action_registerFragment_to_loginFragment)
+            )
+
+            btnRegister.setOnClickListener {
+                handleRegister()
+            }
+        }
     }
 
     /**
@@ -74,8 +82,7 @@ class RegisterFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
 
-                        Navigation.createNavigateOnClickListener(R.id.action_registerFragment_to_loginFragment)
-                        setLoadingState(false)
+                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                     }
 
                     result.onFailure {

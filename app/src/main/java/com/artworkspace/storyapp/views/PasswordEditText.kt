@@ -48,17 +48,12 @@ class PasswordEditText : AppCompatEditText {
         setDrawable(passwordIconDrawable)
 
         addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // Do nothing
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.isNullOrEmpty() && s.length < 6)
                     error = context.getString(R.string.et_password_error_message)
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                // Do nothing
             }
         })
     }

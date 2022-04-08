@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import com.artworkspace.storyapp.MainActivity
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.FragmentLoginBinding
+import com.artworkspace.storyapp.ui.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -99,6 +99,7 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+
     }
 
     /**

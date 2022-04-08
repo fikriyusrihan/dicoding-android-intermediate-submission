@@ -42,17 +42,12 @@ class EmailEditText : AppCompatEditText {
         setDrawable(emailIconDrawable)
 
         addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // Do nothing
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.isNullOrEmpty() && !Patterns.EMAIL_ADDRESS.matcher(s).matches())
                     error = context.getString(R.string.et_email_error_message)
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                // Do nothing
             }
         })
     }

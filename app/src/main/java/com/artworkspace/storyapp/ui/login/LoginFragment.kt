@@ -13,7 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.FragmentLoginBinding
-import com.artworkspace.storyapp.ui.MainActivity
+import com.artworkspace.storyapp.ui.main.MainActivity
+import com.artworkspace.storyapp.ui.main.MainActivity.Companion.EXTRA_TOKEN
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -75,11 +76,19 @@ class LoginFragment : Fragment() {
 
             loginJob = launch {
                 viewModel.userLogin(email, password).collect { result ->
-                    result.onSuccess {
-                        Intent(requireContext(), MainActivity::class.java).also { intent ->
-                            startActivity(intent)
-                            requireActivity().finish()
+                    result.onSuccess { credentials ->
+
+                        // Save token to the preferences
+                        // And direct user to the MainActivity
+                        credentials.loginResult?.token?.let { token ->
+                            viewModel.saveAuthToken(token)
+                            Intent(requireContext(), MainActivity::class.java).also { intent ->
+                                intent.putExtra(EXTRA_TOKEN, token)
+                                startActivity(intent)
+                                requireActivity().finish()
+                            }
                         }
+
                         Toast.makeText(
                             requireContext(),
                             getString(R.string.login_success_message),

@@ -12,6 +12,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class ApiModule {
 
+    /**
+     * Provide API Service instance for Hilt
+     *
+     * @return ApiService
+     */
     @Provides
     @Singleton
     fun provideApiService(): ApiService = ApiConfig.getApiService()

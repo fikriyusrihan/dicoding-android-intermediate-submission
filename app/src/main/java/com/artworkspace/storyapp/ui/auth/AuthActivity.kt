@@ -1,4 +1,4 @@
-package com.artworkspace.storyapp.ui
+package com.artworkspace.storyapp.ui.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +14,5 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-    }
-
-    companion object {
-        private const val TAG = "AuthActivity"
     }
 }

@@ -82,6 +82,7 @@ class RegisterFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
 
+                        // Automatically navigate user back to the login page
                         findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                     }
 
@@ -118,9 +119,5 @@ class RegisterFragment : Fragment() {
                 ObjectAnimator.ofFloat(pbLoading, View.ALPHA, 0f).setDuration(400).start()
             }
         }
-    }
-
-    companion object {
-        private const val TAG = "RegisterFragment"
     }
 }

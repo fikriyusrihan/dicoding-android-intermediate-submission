@@ -1,15 +1,16 @@
 package com.artworkspace.storyapp.data
 
+import com.artworkspace.storyapp.data.local.AuthPreferencesDataSource
 import com.artworkspace.storyapp.data.remote.response.LoginResponse
 import com.artworkspace.storyapp.data.remote.response.RegisterResponse
 import com.artworkspace.storyapp.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
-import kotlin.Result
 
 class AuthRepository @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val preferencesDataSource: AuthPreferencesDataSource
 ) {
 
     /**
@@ -50,4 +51,20 @@ class AuthRepository @Inject constructor(
             emit(Result.failure(e))
         }
     }
+
+    /**
+     * Save user's authentication token to the preferences
+     *
+     * @param token User's authentication token
+     */
+    suspend fun saveAuthToken(token: String) {
+        preferencesDataSource.saveAuthToken(token)
+    }
+
+    /**
+     * Get the user's authentication token from preferences
+     *
+     * @return Flow
+     */
+    fun getAuthToken(): Flow<String?> = preferencesDataSource.getAuthToken()
 }

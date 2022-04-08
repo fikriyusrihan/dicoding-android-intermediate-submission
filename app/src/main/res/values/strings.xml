@@ -15,4 +15,8 @@
     <string name="full_name">Full name</string>
     <string name="et_email_error_message">Email address is not valid</string>
     <string name="et_password_error_message">Passwords must be at least 6 characters</string>
+    <string name="registration_error_message">Registration failed, please try again.</string>
+    <string name="registration_success">Registration success</string>
+    <string name="login_error_message">Login failed, please try again.</string>
+    <string name="login_success_message">Login success</string>
 </resources>

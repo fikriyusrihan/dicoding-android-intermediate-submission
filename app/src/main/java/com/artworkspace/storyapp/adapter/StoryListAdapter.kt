@@ -1,17 +1,24 @@
 package com.artworkspace.storyapp.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
 import com.artworkspace.storyapp.data.remote.response.Story
 import com.artworkspace.storyapp.databinding.LayoutStoryItemBinding
+import com.artworkspace.storyapp.ui.detail.DetailStoryActivity
+import com.artworkspace.storyapp.ui.detail.DetailStoryActivity.Companion.EXTRA_DETAIL
 import com.artworkspace.storyapp.utils.setImageFromUrl
 import com.artworkspace.storyapp.utils.setLocalDateFormat
 
 
 class StoryListAdapter(private val stories: List<Story>) :
     RecyclerView.Adapter<StoryListAdapter.ViewHolder>() {
+
     class ViewHolder(private val binding: LayoutStoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(context: Context, story: Story) {
@@ -20,6 +27,24 @@ class StoryListAdapter(private val stories: List<Story>) :
                 tvStoryDescription.text = story.description
                 ivStoryImage.setImageFromUrl(context, story.photoUrl)
                 tvStoryDate.setLocalDateFormat(story.createdAt)
+
+                // On item clicked
+                root.setOnClickListener {
+                    // Set ActivityOptionsCompat for SharedElement
+                    val optionsCompat: ActivityOptionsCompat =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            root.context as Activity,
+                            Pair(ivStoryImage, "story_image"),
+                            Pair(tvStoryUsername, "username"),
+                            Pair(tvStoryDate, "date"),
+                            Pair(tvStoryDescription, "description")
+                        )
+
+                    Intent(context, DetailStoryActivity::class.java).also { intent ->
+                        intent.putExtra(EXTRA_DETAIL, story)
+                        context.startActivity(intent, optionsCompat.toBundle())
+                    }
+                }
             }
         }
     }
@@ -32,6 +57,7 @@ class StoryListAdapter(private val stories: List<Story>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val story = stories[position]
+
         holder.bind(holder.itemView.context, story)
     }
 

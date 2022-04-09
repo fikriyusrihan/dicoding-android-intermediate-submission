@@ -1,6 +1,8 @@
 package com.artworkspace.storyapp.data.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class StoriesResponse(
 
@@ -14,6 +16,7 @@ data class StoriesResponse(
     val message: String
 )
 
+@Parcelize
 data class Story(
 
     @field:SerializedName("photoUrl")
@@ -36,4 +39,4 @@ data class Story(
 
     @field:SerializedName("lat")
     val lat: Double?
-)
+) : Parcelable

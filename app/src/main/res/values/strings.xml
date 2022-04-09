@@ -27,4 +27,6 @@
     <string name="logout">Logout</string>
     <string name="create_story">Create story</string>
     <string name="error_occurred_message">An error occurred</string>
+    <string name="story_illustration">Story illustration</string>
+    <string name="detail_toolbar_title">%s\'s story</string>
 </resources>

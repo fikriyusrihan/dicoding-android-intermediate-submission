@@ -13,6 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryApp">
         <activity
+            android:name=".ui.detail.DetailStoryActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:parentActivityName=".ui.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.main.MainActivity" />
+
+        </activity>
+        <activity
             android:name=".ui.auth.AuthActivity"
             android:exported="false" />
         <activity
@@ -24,7 +34,6 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -33,6 +33,22 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         token = intent.getStringExtra(EXTRA_TOKEN)!!
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.getAllStories(token).collect { result ->
+                result.onSuccess { response ->
+                    setRecyclerView(response.stories)
+                }
+
+                result.onFailure {
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.error_occurred_message),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -54,25 +70,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        lifecycleScope.launchWhenResumed {
-            viewModel.getAllStories(token).collect { result ->
-                result.onSuccess { response ->
-                    setRecyclerView(response.stories)
-                }
-
-                result.onFailure {
-                    Toast.makeText(
-                        this@MainActivity,
-                        getString(R.string.error_occurred_message),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
-    }
-
     /**
      * Set the RecyclerView UI state
      *
@@ -88,7 +85,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TAG = "MainActivity"
         const val EXTRA_TOKEN = "extra_token"
     }
 }

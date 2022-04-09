@@ -20,7 +20,7 @@ fun ImageView.setImageFromUrl(context: Context, url: String) {
         .with(context)
         .load(url)
         .placeholder(R.drawable.image_loading_placeholder)
-        .centerCrop()
+        .error(R.drawable.image_load_error)
         .into(this)
 }
 

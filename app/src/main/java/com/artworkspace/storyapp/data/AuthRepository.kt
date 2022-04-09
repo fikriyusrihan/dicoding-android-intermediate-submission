@@ -4,8 +4,10 @@ import com.artworkspace.storyapp.data.local.AuthPreferencesDataSource
 import com.artworkspace.storyapp.data.remote.response.LoginResponse
 import com.artworkspace.storyapp.data.remote.response.RegisterResponse
 import com.artworkspace.storyapp.data.remote.retrofit.ApiService
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(
@@ -28,7 +30,7 @@ class AuthRepository @Inject constructor(
             e.printStackTrace()
             emit(Result.failure(e))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     /**
      * Handle registration process for the users by calling the related API
@@ -50,7 +52,7 @@ class AuthRepository @Inject constructor(
             e.printStackTrace()
             emit(Result.failure(e))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     /**
      * Save user's authentication token to the preferences

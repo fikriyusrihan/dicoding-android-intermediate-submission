@@ -3,6 +3,10 @@
     package="com.artworkspace.storyapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
         android:name=".BaseApplication"
@@ -13,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryApp">
         <activity
+            android:name=".ui.create.CreateStoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.detail.DetailStoryActivity"
             android:exported="false"
             android:launchMode="singleTask"
@@ -20,7 +27,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.main.MainActivity" />
-
         </activity>
         <activity
             android:name=".ui.auth.AuthActivity"
@@ -34,9 +40,28 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.artworkspace.storyapp"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
 
 </manifest>

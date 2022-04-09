@@ -14,6 +14,7 @@ import com.artworkspace.storyapp.adapter.StoryListAdapter
 import com.artworkspace.storyapp.data.remote.response.Story
 import com.artworkspace.storyapp.databinding.ActivityMainBinding
 import com.artworkspace.storyapp.ui.auth.AuthActivity
+import com.artworkspace.storyapp.ui.create.CreateStoryActivity
 import com.artworkspace.storyapp.utils.animateVisibility
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +38,12 @@ class MainActivity : AppCompatActivity() {
 
         setSwipeRefreshLayout()
         getAllStories()
+
+        binding.fabCreateStory.setOnClickListener {
+            Intent(this, CreateStoryActivity::class.java).also {
+                startActivity(it)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -65,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         binding.viewLoading.animateVisibility(true)
         binding.swipeRefresh.isRefreshing = true
 
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launchWhenResumed {
             viewModel.getAllStories(token).collect { result ->
                 result.onSuccess { response ->
                     setRecyclerView(response.stories)

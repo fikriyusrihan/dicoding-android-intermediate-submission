@@ -13,7 +13,8 @@
         android:background="@color/light_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/dark_blue_500" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

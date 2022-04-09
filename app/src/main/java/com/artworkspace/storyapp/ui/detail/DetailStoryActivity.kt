@@ -79,7 +79,6 @@ class DetailStoryActivity : AppCompatActivity() {
                     .placeholder(R.drawable.image_loading_placeholder)
                     .error(R.drawable.image_load_error)
                     .into(ivStoryImage)
-
             }
         }
     }

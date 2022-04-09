@@ -1,8 +1,11 @@
 package com.artworkspace.storyapp.data.remote.retrofit
 
+import com.artworkspace.storyapp.data.remote.response.FileUploadResponse
 import com.artworkspace.storyapp.data.remote.response.LoginResponse
 import com.artworkspace.storyapp.data.remote.response.RegisterResponse
 import com.artworkspace.storyapp.data.remote.response.StoriesResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -50,4 +53,19 @@ interface ApiService {
         @Query("page") page: Int?,
         @Query("size") size: Int?
     ): StoriesResponse
+
+    /**
+     * Call the API that handle uploading image process
+     *
+     * @param token User's authentication token
+     * @param file Multipart image
+     * @param description Image description
+     */
+    @Multipart
+    @POST("stories")
+    suspend fun uploadImage(
+        @Header("Authorization") token: String,
+        @Part file: MultipartBody.Part,
+        @Part("description") description: RequestBody
+    ): FileUploadResponse
 }

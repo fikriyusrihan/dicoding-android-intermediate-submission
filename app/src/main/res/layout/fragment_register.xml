@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="220dp"
         android:layout_marginTop="40sp"
-        android:contentDescription="@string/person_with_paper_illustration"
+        android:contentDescription="@string/person_with_computer"
         android:src="@drawable/illustration_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

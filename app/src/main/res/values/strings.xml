@@ -31,4 +31,15 @@
     <string name="detail_toolbar_title">%s\'s story</string>
     <string name="no_data">No data</string>
     <string name="stories_not_found_error">Stories not found</string>
+    <string name="add_story_title">Add Story</string>
+    <string name="upload_story">Upload Story</string>
+    <string name="person_with_computer">Person with computer</string>
+    <string name="select_image">Select image from</string>
+    <string name="select_from_camera">Camera</string>
+    <string name="select_from_gallery">Gallery</string>
+    <string name="write_a_description">Write a description</string>
+    <string name="desc_empty_field_error">Please fill the description field</string>
+    <string name="empty_image_error">Please select an image</string>
+    <string name="image_upload_failed">Story upload failed</string>
+    <string name="story_upload">Story uploaded</string>
 </resources>

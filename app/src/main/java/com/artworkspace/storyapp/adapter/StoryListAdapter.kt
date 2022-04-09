@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.artworkspace.storyapp.data.remote.response.Story
 import com.artworkspace.storyapp.databinding.LayoutStoryItemBinding
@@ -16,8 +18,8 @@ import com.artworkspace.storyapp.utils.setImageFromUrl
 import com.artworkspace.storyapp.utils.setLocalDateFormat
 
 
-class StoryListAdapter(private val stories: List<Story>) :
-    RecyclerView.Adapter<StoryListAdapter.ViewHolder>() {
+class StoryListAdapter :
+    ListAdapter<Story, StoryListAdapter.ViewHolder>(DiffCallback) {
 
     class ViewHolder(private val binding: LayoutStoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -56,11 +58,20 @@ class StoryListAdapter(private val stories: List<Story>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val story = stories[position]
-
+        val story = getItem(position)
         holder.bind(holder.itemView.context, story)
     }
 
-    override fun getItemCount(): Int = stories.size
+    companion object {
+        private val DiffCallback = object : DiffUtil.ItemCallback<Story>() {
+            override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
 }

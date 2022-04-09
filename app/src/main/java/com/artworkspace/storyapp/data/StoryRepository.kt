@@ -26,8 +26,8 @@ class StoryRepository @Inject constructor(
      */
     suspend fun getAllStories(
         token: String,
-        page: Int?,
-        size: Int?
+        page: Int? = null,
+        size: Int? = null
     ): Flow<Result<StoriesResponse>> = flow {
         try {
             val bearerToken = generateBearerToken(token)

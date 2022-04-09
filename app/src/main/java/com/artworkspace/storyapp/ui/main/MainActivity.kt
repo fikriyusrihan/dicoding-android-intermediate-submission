@@ -2,6 +2,7 @@ package com.artworkspace.storyapp.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -67,6 +68,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
+                true
+            }
+            R.id.menu_setting -> {
+                startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                 true
             }
             else -> super.onOptionsItemSelected(item)

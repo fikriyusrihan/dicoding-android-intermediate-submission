@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_to_story">Pengguna baru Story?</string>
+    <string name="register">Daftar</string>
+    <string name="already_have_an_account">Sudah memiliki akun?</string>
+    <string name="login">Masuk</string>
+    <string name="press_again_to_exit">Tekan kembali untuk keluar</string>
+    <string name="person_with_paper_illustration">Seseorang dengan kertas</string>
+    <string name="login_title">Halo, mari masuk</string>
+    <string name="login_message">Dapatkan seluruh cerita pengalaman siswa selama belajar di Dicoding, dan kamu juga dapat membagikan ceritamu ✍️</string>
+    <string name="email">Email</string>
+    <string name="password">Kata sandi</string>
+    <string name="register_title">Ayo buat akun</string>
+    <string name="register_message">Baru di aplikasi ini? Ayo buat akun baru untuk kamu✨</string>
+    <string name="full_name">Nama lengkap</string>
+    <string name="et_email_error_message">Alamat email tidak sesuai</string>
+    <string name="et_password_error_message">Kata sandi harus lebih dari 6 karakter</string>
+    <string name="registration_error_message">Registrasi gagal, harap coba kembali</string>
+    <string name="registration_success">Registrasi berhasil</string>
+    <string name="login_error_message">Login gagal, silakan coba kembali</string>
+    <string name="login_success_message">Login berhasil</string>
+    <string name="story_s_illustration">Gambar cerita</string>
+    <string name="stories">Cerita</string>
+    <string name="logout">Keluar</string>
+    <string name="create_story">Buat cerita</string>
+    <string name="error_occurred_message">Terjadi kesalahan</string>
+    <string name="story_illustration">Gambar cerita</string>
+    <string name="detail_toolbar_title">Cerita %s</string>
+    <string name="no_data">Tidak ada data</string>
+    <string name="stories_not_found_error">Cerita tidak ditemukan</string>
+    <string name="add_story_title">Tambahkan cerita</string>
+    <string name="upload_story">Unggah cerita</string>
+    <string name="person_with_computer">Seseorang dengan komputer</string>
+    <string name="select_image">Pilih gambar melalui</string>
+    <string name="select_from_camera">Kamera</string>
+    <string name="select_from_gallery">Galeri</string>
+    <string name="write_a_description">Tuliskan sebuah deskripsi</string>
+    <string name="desc_empty_field_error">Tolong masukkan deskripsi</string>
+    <string name="empty_image_error">Tolong pilih sebuah gambar</string>
+    <string name="image_upload_failed">Unggah cerita gagal</string>
+    <string name="story_upload">Cerita berhasil diupload</string>
+    <string name="language_setting">Pengaturan bahasa</string>
+</resources>

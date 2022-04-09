@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Story App</string>
+    <string name="app_name" translatable="false">Story App</string>
     <string name="new_to_story">New to Story?</string>
     <string name="register">Register</string>
     <string name="already_have_an_account">Already have an account?</string>
@@ -19,9 +19,9 @@
     <string name="registration_success">Registration success</string>
     <string name="login_error_message">Login failed, please try again.</string>
     <string name="login_success_message">Login success</string>
-    <string name="dummy_name">Fikri Yusrihan</string>
-    <string name="dummy_description">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsu....</string>
-    <string name="dummy_date">April 6, 2022</string>
+    <string name="dummy_name" translatable="false">Fikri Yusrihan</string>
+    <string name="dummy_description" translatable="false">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsu....</string>
+    <string name="dummy_date" translatable="false">April 6, 2022</string>
     <string name="story_s_illustration">Story\'s illustration</string>
     <string name="stories">Stories</string>
     <string name="logout">Logout</string>

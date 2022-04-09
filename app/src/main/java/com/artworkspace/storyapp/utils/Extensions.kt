@@ -1,6 +1,8 @@
 package com.artworkspace.storyapp.utils
 
+import android.animation.ObjectAnimator
 import android.content.Context
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.artworkspace.storyapp.R
@@ -35,4 +37,17 @@ fun TextView.setLocalDateFormat(timestamp: String) {
 
     val formattedDate = DateFormat.getDateInstance(DateFormat.FULL).format(date)
     this.text = formattedDate
+}
+
+/**
+ * Animate visibility by transforming alpha value of a view
+ *
+ * @param isVisible View visibility
+ * @param duration Animation duration, default 400
+ */
+fun View.animateVisibility(isVisible: Boolean, duration: Long = 400) {
+    ObjectAnimator
+        .ofFloat(this, View.ALPHA, if (isVisible) 1f else 0f)
+        .setDuration(duration)
+        .start()
 }

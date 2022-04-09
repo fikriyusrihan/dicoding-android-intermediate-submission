@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Code/Android/StoryApp/app/src/main/res/drawable/enable_button_bg.xml" value="0.145" />
+        <entry key="..\:/Code/Android/StoryApp/app/src/main/res/drawable/illustration_no_data.xml" value="0.2585" />
         <entry key="..\:/Code/Android/StoryApp/app/src/main/res/drawable/splash_bg.xml" value="0.218" />
         <entry key="..\:/Code/Android/StoryApp/app/src/main/res/layout/activity_auth.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/StoryApp/app/src/main/res/layout/activity_detail_story.xml" value="0.38697916666666665" />

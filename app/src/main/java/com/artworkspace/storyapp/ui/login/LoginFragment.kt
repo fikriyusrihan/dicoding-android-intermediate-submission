@@ -1,6 +1,5 @@
 package com.artworkspace.storyapp.ui.login
 
-import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +14,7 @@ import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.FragmentLoginBinding
 import com.artworkspace.storyapp.ui.main.MainActivity
 import com.artworkspace.storyapp.ui.main.MainActivity.Companion.EXTRA_TOKEN
+import com.artworkspace.storyapp.utils.animateVisibility
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -124,11 +124,9 @@ class LoginFragment : Fragment() {
 
             // Animate views alpha
             if (isLoading) {
-                ObjectAnimator.ofFloat(viewLoading, View.ALPHA, 0.4f).setDuration(400).start()
-                ObjectAnimator.ofFloat(pbLoading, View.ALPHA, 1f).setDuration(400).start()
+                viewLoading.animateVisibility(true)
             } else {
-                ObjectAnimator.ofFloat(viewLoading, View.ALPHA, 0f).setDuration(400).start()
-                ObjectAnimator.ofFloat(pbLoading, View.ALPHA, 0f).setDuration(400).start()
+                viewLoading.animateVisibility(false)
             }
         }
     }

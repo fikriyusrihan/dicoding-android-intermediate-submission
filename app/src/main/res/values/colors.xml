@@ -3,6 +3,7 @@
     <color name="dark_blue_500">#2D3E50</color>
     <color name="dark_blue_700">#212F3E</color>
     <color name="light_blue">#EFF1F3</color>
+    <color name="transparent_blue">#4D2D3E50</color>
 
     <color name="pink_500">#F43F5E</color>
     <color name="pink_700">#C32D46</color>

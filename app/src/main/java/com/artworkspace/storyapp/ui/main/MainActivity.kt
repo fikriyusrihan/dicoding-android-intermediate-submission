@@ -14,6 +14,7 @@ import com.artworkspace.storyapp.adapter.StoryListAdapter
 import com.artworkspace.storyapp.data.remote.response.Story
 import com.artworkspace.storyapp.databinding.ActivityMainBinding
 import com.artworkspace.storyapp.ui.auth.AuthActivity
+import com.artworkspace.storyapp.utils.animateVisibility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,21 +35,8 @@ class MainActivity : AppCompatActivity() {
 
         token = intent.getStringExtra(EXTRA_TOKEN)!!
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.getAllStories(token).collect { result ->
-                result.onSuccess { response ->
-                    setRecyclerView(response.stories)
-                }
-
-                result.onFailure {
-                    Toast.makeText(
-                        this@MainActivity,
-                        getString(R.string.error_occurred_message),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
+        setSwipeRefreshLayout()
+        getAllStories()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -67,6 +55,56 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    /**
+     * Get all stories data and set the related views state
+     */
+    private fun getAllStories() {
+        binding.viewLoading.animateVisibility(true)
+        binding.swipeRefresh.isRefreshing = true
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.getAllStories(token).collect { result ->
+                result.onSuccess { response ->
+                    setRecyclerView(response.stories)
+
+                    binding.apply {
+                        tvNotFoundError.animateVisibility(response.stories.isEmpty())
+                        ivNotFoundError.animateVisibility(response.stories.isEmpty())
+                        rvStories.animateVisibility(response.stories.isNotEmpty())
+                        viewLoading.animateVisibility(false)
+                        swipeRefresh.isRefreshing = false
+                    }
+                }
+
+                result.onFailure {
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.error_occurred_message),
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    binding.apply {
+                        tvNotFoundError.animateVisibility(true)
+                        ivNotFoundError.animateVisibility(true)
+                        rvStories.animateVisibility(false)
+                        viewLoading.animateVisibility(false)
+                        swipeRefresh.isRefreshing = false
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Set the SwipeRefreshLayout state
+     */
+    private fun setSwipeRefreshLayout() {
+        binding.swipeRefresh.setOnRefreshListener {
+            getAllStories()
+            binding.viewLoading.animateVisibility(false)
         }
     }
 

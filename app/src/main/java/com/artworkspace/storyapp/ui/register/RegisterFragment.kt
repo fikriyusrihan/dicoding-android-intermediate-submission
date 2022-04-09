@@ -1,6 +1,5 @@
 package com.artworkspace.storyapp.ui.register
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +12,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.FragmentRegisterBinding
+import com.artworkspace.storyapp.utils.animateVisibility
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -109,14 +109,12 @@ class RegisterFragment : Fragment() {
             etEmail.isEnabled = !isLoading
             etPassword.isEnabled = !isLoading
             etFullName.isEnabled = !isLoading
-            btnLogin.isEnabled = !isLoading
+            btnRegister.isEnabled = !isLoading
 
             if (isLoading) {
-                ObjectAnimator.ofFloat(viewLoading, View.ALPHA, 0.4f).setDuration(400).start()
-                ObjectAnimator.ofFloat(pbLoading, View.ALPHA, 1f).setDuration(400).start()
+                viewLoading.animateVisibility(true)
             } else {
-                ObjectAnimator.ofFloat(viewLoading, View.ALPHA, 0f).setDuration(400).start()
-                ObjectAnimator.ofFloat(pbLoading, View.ALPHA, 0f).setDuration(400).start()
+                viewLoading.animateVisibility(false)
             }
         }
     }

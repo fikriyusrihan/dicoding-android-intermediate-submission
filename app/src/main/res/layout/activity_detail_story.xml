@@ -26,8 +26,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_marginVertical="16dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp">
 
             <TextView
                 android:id="@+id/tv_story_username"
@@ -61,9 +61,9 @@
                 android:id="@+id/iv_story_image"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:scaleType="matrix"
                 android:layout_marginTop="16dp"
                 android:contentDescription="@string/story_illustration"
+                android:scaleType="matrix"
                 android:transitionName="story_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

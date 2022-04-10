@@ -121,8 +121,8 @@
     <RelativeLayout
         android:id="@+id/view_loading"
         android:layout_width="0dp"
-        android:alpha="0"
         android:layout_height="0dp"
+        android:alpha="0"
         android:background="@color/transparent_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

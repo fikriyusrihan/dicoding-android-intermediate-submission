@@ -1,13 +1,11 @@
 package com.artworkspace.storyapp.utils
 
-import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
-import com.artworkspace.storyapp.R
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,23 +18,23 @@ val timeStamp: String = SimpleDateFormat(
     Locale.US
 ).format(System.currentTimeMillis())
 
+/**
+ * Create image temporary file
+ *
+ * @param context
+ */
 fun createTempFile(context: Context): File {
     val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
     return File.createTempFile(timeStamp, ".jpg", storageDir)
 }
 
-fun createFile(application: Application): File {
-    val mediaDir = application.externalMediaDirs.firstOrNull()?.let {
-        File(it, application.resources.getString(R.string.app_name)).apply { mkdirs() }
-    }
-
-    val outputDirectory = if (
-        mediaDir != null && mediaDir.exists()
-    ) mediaDir else application.filesDir
-
-    return File(outputDirectory, "$timeStamp.jpg")
-}
-
+/**
+ * Convert resource URI to file
+ *
+ * @param selectedImg Original resource URI
+ * @param context
+ * @return File
+ */
 fun uriToFile(selectedImg: Uri, context: Context): File {
     val contentResolver: ContentResolver = context.contentResolver
     val myFile = createTempFile(context)
@@ -52,12 +50,19 @@ fun uriToFile(selectedImg: Uri, context: Context): File {
     return myFile
 }
 
+/**
+ * Compress image file size until under 1MB
+ *
+ * @param file Original file
+ * @return File - Compressed file
+ */
 fun reduceFileImage(file: File): File {
     val bitmap = BitmapFactory.decodeFile(file.path)
 
     var compressQuality = 100
     var streamLength: Int
 
+    // Repeat until the file size under 1MB
     do {
         val bmpStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)

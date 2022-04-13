@@ -1,3 +1,46 @@
 <resources>
-    <string name="app_name">Story App</string>
+    <string name="app_name" translatable="false">Story App</string>
+    <string name="new_to_story">New to Story?</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="press_again_to_exit">Press again to exit</string>
+    <string name="person_with_paper_illustration">Person with paper illustration</string>
+    <string name="login_title">Hello, let\'s sign in</string>
+    <string name="login_message">Explore all of student\'s experience and story when learning in Dicoding, and of course you can also share your story too✍️</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register_title">Let\'s create an account</string>
+    <string name="register_message">New to this application? \nLet\'s create an account for you ✨</string>
+    <string name="full_name">Full name</string>
+    <string name="et_email_error_message">Email address is not valid</string>
+    <string name="et_password_error_message">Passwords must be at least 6 characters</string>
+    <string name="registration_error_message">Registration failed, please try again.</string>
+    <string name="registration_success">Registration success</string>
+    <string name="login_error_message">Login failed, please try again.</string>
+    <string name="login_success_message">Login success</string>
+    <string name="dummy_name" translatable="false">Fikri Yusrihan</string>
+    <string name="dummy_description" translatable="false">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsu....</string>
+    <string name="dummy_date" translatable="false">April 6, 2022</string>
+    <string name="story_s_illustration">Story\'s illustration</string>
+    <string name="stories">Stories</string>
+    <string name="logout">Logout</string>
+    <string name="create_story">Create story</string>
+    <string name="error_occurred_message">An error occurred</string>
+    <string name="story_illustration">Story illustration</string>
+    <string name="detail_toolbar_title">%s\'s story</string>
+    <string name="no_data">No data</string>
+    <string name="stories_not_found_error">Stories not found</string>
+    <string name="add_story_title">Add Story</string>
+    <string name="upload_story">Upload Story</string>
+    <string name="person_with_computer">Person with computer</string>
+    <string name="select_image">Select image from</string>
+    <string name="select_from_camera">Camera</string>
+    <string name="select_from_gallery">Gallery</string>
+    <string name="write_a_description">Write a description</string>
+    <string name="desc_empty_field_error">Please fill the description field</string>
+    <string name="empty_image_error">Please select an image</string>
+    <string name="image_upload_failed">Story upload failed</string>
+    <string name="story_upload">Story uploaded</string>
+    <string name="language_setting">Language Setting</string>
 </resources>

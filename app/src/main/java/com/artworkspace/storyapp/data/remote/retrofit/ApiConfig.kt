@@ -1,6 +1,7 @@
 package com.artworkspace.storyapp.data.remote.retrofit
 
 import com.artworkspace.storyapp.BuildConfig
+import com.artworkspace.storyapp.BuildConfig.API_BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -25,7 +26,7 @@ class ApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://story-api.dicoding.dev/v1/")
+                .baseUrl(API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

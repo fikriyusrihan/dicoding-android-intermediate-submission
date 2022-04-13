@@ -18,10 +18,10 @@ import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.lifecycleScope
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.ActivityCreateStoryBinding
+import com.artworkspace.storyapp.utils.MediaUtility
+import com.artworkspace.storyapp.utils.MediaUtility.reduceFileImage
+import com.artworkspace.storyapp.utils.MediaUtility.uriToFile
 import com.artworkspace.storyapp.utils.animateVisibility
-import com.artworkspace.storyapp.utils.createTempFile
-import com.artworkspace.storyapp.utils.reduceFileImage
-import com.artworkspace.storyapp.utils.uriToFile
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -213,7 +213,7 @@ class CreateStoryActivity : AppCompatActivity() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.resolveActivity(packageManager)
 
-        createTempFile(application).also {
+        MediaUtility.createTempFile(application).also {
             val photoUri = FileProvider.getUriForFile(
                 this,
                 "com.artworkspace.storyapp",

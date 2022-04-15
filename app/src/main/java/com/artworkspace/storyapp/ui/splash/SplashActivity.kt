@@ -7,8 +7,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.artworkspace.storyapp.ui.auth.AuthActivity
-import com.artworkspace.storyapp.ui.main.MainActivity
-import com.artworkspace.storyapp.ui.main.MainActivity.Companion.EXTRA_TOKEN
+import com.artworkspace.storyapp.ui.home.HomeActivity
+import com.artworkspace.storyapp.ui.home.HomeActivity.Companion.EXTRA_TOKEN
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -38,7 +38,7 @@ class SplashActivity : AppCompatActivity() {
                         }
                     } else {
                         // Token detected on data source, go to MainActivity
-                        Intent(this@SplashActivity, MainActivity::class.java).also { intent ->
+                        Intent(this@SplashActivity, HomeActivity::class.java).also { intent ->
                             intent.putExtra(EXTRA_TOKEN, token)
                             startActivity(intent)
                             finish()

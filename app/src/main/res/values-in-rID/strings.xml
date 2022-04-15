@@ -40,4 +40,7 @@
     <string name="image_upload_failed">Unggah cerita gagal</string>
     <string name="story_upload">Cerita berhasil diupload</string>
     <string name="language_setting">Pengaturan bahasa</string>
+    <string name="title_home">Beranda</string>
+    <string name="setting">Pengaturan</string>
+    <string name="location">Lokasi</string>
 </resources>

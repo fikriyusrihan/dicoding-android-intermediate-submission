@@ -43,4 +43,8 @@
     <string name="image_upload_failed">Story upload failed</string>
     <string name="story_upload">Story uploaded</string>
     <string name="language_setting">Language Setting</string>
+    <string name="title_activity_home" translatable="false">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="setting">Setting</string>
+    <string name="location">Location</string>
 </resources>

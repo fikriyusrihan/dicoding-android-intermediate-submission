@@ -12,8 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.FragmentLoginBinding
+import com.artworkspace.storyapp.ui.home.HomeActivity.Companion.EXTRA_TOKEN
 import com.artworkspace.storyapp.ui.main.MainActivity
-import com.artworkspace.storyapp.ui.main.MainActivity.Companion.EXTRA_TOKEN
 import com.artworkspace.storyapp.utils.animateVisibility
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,13 +1,13 @@
-package com.artworkspace.storyapp.ui.main
+package com.artworkspace.storyapp.ui.home.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
-import android.view.Menu
-import android.view.MenuItem
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -16,67 +16,54 @@ import androidx.recyclerview.widget.RecyclerView
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.adapter.StoryListAdapter
 import com.artworkspace.storyapp.data.remote.response.Story
-import com.artworkspace.storyapp.databinding.ActivityMainBinding
-import com.artworkspace.storyapp.ui.auth.AuthActivity
+import com.artworkspace.storyapp.databinding.FragmentHomeBinding
 import com.artworkspace.storyapp.ui.create.CreateStoryActivity
-import com.artworkspace.storyapp.ui.home.HomeActivity.Companion.EXTRA_TOKEN
+import com.artworkspace.storyapp.ui.home.HomeActivity
 import com.artworkspace.storyapp.utils.animateVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class HomeFragment : Fragment() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var listAdapter: StoryListAdapter
 
     private var token: String = ""
-    private val viewModel: MainViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentHomeBinding.inflate(LayoutInflater.from(requireActivity()))
+        return binding.root
+    }
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        token = intent.getStringExtra(EXTRA_TOKEN)!!
+        // FIXME: Try to using fragment arguments instead of this
+        token = activity?.intent?.getStringExtra(HomeActivity.EXTRA_TOKEN)!!
 
         setSwipeRefreshLayout()
         setRecyclerView()
         getAllStories()
 
         binding.fabCreateStory.setOnClickListener {
-            Intent(this, CreateStoryActivity::class.java).also {
-                startActivity(it)
+            Intent(requireContext(), CreateStoryActivity::class.java).also { intent ->
+                startActivity(intent)
             }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_logout -> {
-                viewModel.saveAuthToken("")
-                Intent(this, AuthActivity::class.java).also { intent ->
-                    startActivity(intent)
-                    finish()
-                }
-                true
-            }
-            R.id.menu_setting -> {
-                startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     /**
@@ -89,9 +76,9 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             // Always repeat in the onResume state
             // To make sure the recyclerview always get the latest data
-            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
 
-                viewModel.getAllStories(token).collect { result ->
+                homeViewModel.getAllStories(token).collect { result ->
                     result.onSuccess { response ->
                         updateRecyclerViewData(response.stories)
 
@@ -106,7 +93,7 @@ class MainActivity : AppCompatActivity() {
 
                     result.onFailure {
                         Toast.makeText(
-                            this@MainActivity,
+                            requireContext(),
                             getString(R.string.error_occurred_message),
                             Toast.LENGTH_SHORT
                         ).show()
@@ -139,7 +126,7 @@ class MainActivity : AppCompatActivity() {
      *
      */
     private fun setRecyclerView() {
-        val linearLayoutManager = LinearLayoutManager(this)
+        val linearLayoutManager = LinearLayoutManager(requireContext())
         listAdapter = StoryListAdapter()
 
         recyclerView = binding.rvStories
@@ -165,5 +152,4 @@ class MainActivity : AppCompatActivity() {
         // Restore last recyclerview state
         recyclerView.layoutManager?.onRestoreInstanceState(recyclerViewState)
     }
-
 }

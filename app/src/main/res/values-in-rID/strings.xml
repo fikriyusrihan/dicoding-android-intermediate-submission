@@ -48,4 +48,8 @@
     <string name="location_permission_denied_action">Ubah pengaturan</string>
     <string name="retry">Coba lagi</string>
     <string name="loading_error_message">Tidak dapat mengambil cerita</string>
+    <string name="logout_dialog_title">Apakah kamu yakin?</string>
+    <string name="logout_dialog_message">Setelah logout, anda harus login kembali</string>
+    <string name="cancel">Batal</string>
+    <string name="logout_message_success">Berhasil logout</string>
 </resources>

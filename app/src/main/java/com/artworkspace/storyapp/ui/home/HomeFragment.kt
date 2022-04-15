@@ -1,4 +1,4 @@
-package com.artworkspace.storyapp.ui.home.ui.home
+package com.artworkspace.storyapp.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +19,7 @@ import com.artworkspace.storyapp.adapter.StoryListAdapter
 import com.artworkspace.storyapp.data.remote.response.Story
 import com.artworkspace.storyapp.databinding.FragmentHomeBinding
 import com.artworkspace.storyapp.ui.create.CreateStoryActivity
-import com.artworkspace.storyapp.ui.home.HomeActivity
+import com.artworkspace.storyapp.ui.main.MainActivity
 import com.artworkspace.storyapp.utils.animateVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -34,7 +36,6 @@ class HomeFragment : Fragment() {
     private lateinit var listAdapter: StoryListAdapter
 
     private var token: String = ""
-    private var storyJob: Job = Job()
     private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
@@ -49,8 +50,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // FIXME: Try to using fragment arguments instead of this
-        token = activity?.intent?.getStringExtra(HomeActivity.EXTRA_TOKEN)!!
+        token = requireActivity().intent.getStringExtra(MainActivity.EXTRA_TOKEN)!!
 
         setSwipeRefreshLayout()
         setRecyclerView()
@@ -72,12 +72,9 @@ class HomeFragment : Fragment() {
      * Get all stories data and set the related views state
      */
     private fun getAllStories() {
-        // Make sure only one job that handle getStory
-        storyJob.cancel()
-
-        lifecycleScope.launchWhenResumed {
-            storyJob = launch {
-                homeViewModel.getStory(token).collectLatest { result ->
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                homeViewModel.getAllStories(token).collectLatest { result ->
                     updateRecyclerViewData(result)
                 }
             }

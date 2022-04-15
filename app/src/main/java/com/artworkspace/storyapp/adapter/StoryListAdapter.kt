@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.artworkspace.storyapp.data.remote.response.Story
 import com.artworkspace.storyapp.databinding.LayoutStoryItemBinding
@@ -19,7 +19,7 @@ import com.artworkspace.storyapp.utils.setLocalDateFormat
 
 
 class StoryListAdapter :
-    ListAdapter<Story, StoryListAdapter.ViewHolder>(DiffCallback) {
+    PagingDataAdapter<Story, StoryListAdapter.ViewHolder>(DiffCallback) {
 
     class ViewHolder(private val binding: LayoutStoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -59,7 +59,9 @@ class StoryListAdapter :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val story = getItem(position)
-        holder.bind(holder.itemView.context, story)
+        if (story != null) {
+            holder.bind(holder.itemView.context, story)
+        }
     }
 
     companion object {

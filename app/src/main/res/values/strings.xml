@@ -50,4 +50,6 @@
     <string name="share_location">Share location</string>
     <string name="location_permission_denied">Location permission not allowed</string>
     <string name="location_permission_denied_action">Change Setting</string>
+    <string name="retry">Retry</string>
+    <string name="loading_error_message">Unable to fetch stories data</string>
 </resources>

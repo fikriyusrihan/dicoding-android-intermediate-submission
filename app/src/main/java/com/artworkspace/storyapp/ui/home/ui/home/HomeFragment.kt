@@ -87,7 +87,10 @@ class HomeFragment : Fragment() {
                             ivNotFoundError.animateVisibility(response.stories.isEmpty())
                             rvStories.animateVisibility(response.stories.isNotEmpty())
                             viewLoading.animateVisibility(false)
+
                             swipeRefresh.isRefreshing = false
+                            rvStories.visibility =
+                                if (response.stories.isEmpty()) View.GONE else View.VISIBLE
                         }
                     }
 

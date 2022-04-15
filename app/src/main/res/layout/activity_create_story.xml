@@ -83,14 +83,32 @@
                 app:layout_constraintTop_toTopOf="@+id/btn_camera" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                android:text="@string/share_location"
+                app:layout_constraintStart_toStartOf="@+id/btn_camera"
+                app:layout_constraintTop_toBottomOf="@+id/et_description" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView5" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:labelFor="@id/et_description"
                 android:text="@string/write_a_description"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/btn_gallery" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_camera" />
 
             <EditText
                 android:id="@+id/et_description"

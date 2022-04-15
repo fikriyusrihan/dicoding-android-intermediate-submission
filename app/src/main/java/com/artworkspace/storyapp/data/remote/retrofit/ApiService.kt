@@ -60,12 +60,16 @@ interface ApiService {
      * @param token User's authentication token
      * @param file Multipart image
      * @param description Image description
+     * @param lat Latitude
+     * @param lon Longitude
      */
     @Multipart
     @POST("stories")
     suspend fun uploadImage(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
-        @Part("description") description: RequestBody
+        @Part("description") description: RequestBody,
+        @Part("lat") lat: RequestBody?,
+        @Part("lon") lon: RequestBody?
     ): FileUploadResponse
 }

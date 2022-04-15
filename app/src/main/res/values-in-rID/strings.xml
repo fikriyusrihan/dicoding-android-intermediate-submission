@@ -43,4 +43,7 @@
     <string name="title_home">Beranda</string>
     <string name="setting">Pengaturan</string>
     <string name="location">Lokasi</string>
+    <string name="share_location">Bagikan lokasi</string>
+    <string name="location_permission_denied">Izin lokasi ditolak</string>
+    <string name="location_permission_denied_action">Ubah pengaturan</string>
 </resources>

@@ -29,11 +29,15 @@ class CreateViewModel @Inject constructor(
      * @param token User's authentication token
      * @param file Image file
      * @param description Image description
+     * @param lat Latitude
+     * @param lon Longitude
      */
     suspend fun uploadImage(
         token: String,
         file: MultipartBody.Part,
-        description: RequestBody
+        description: RequestBody,
+        lat: RequestBody?,
+        lon: RequestBody?
     ): Flow<Result<FileUploadResponse>> =
-        storyRepository.uploadImage(token, file, description)
+        storyRepository.uploadImage(token, file, description, lat, lon)
 }

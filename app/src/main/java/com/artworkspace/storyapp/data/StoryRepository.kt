@@ -45,15 +45,19 @@ class StoryRepository @Inject constructor(
      * @param token User's authentication token
      * @param file Image file
      * @param description Image description
+     * @param lat Latitude
+     * @param lon Longitude
      */
     suspend fun uploadImage(
         token: String,
         file: MultipartBody.Part,
-        description: RequestBody
+        description: RequestBody,
+        lat: RequestBody? = null,
+        lon: RequestBody? = null
     ): Flow<Result<FileUploadResponse>> = flow {
         try {
             val bearerToken = generateBearerToken(token)
-            val response = apiService.uploadImage(bearerToken, file, description)
+            val response = apiService.uploadImage(bearerToken, file, description, lat, lon)
             emit(Result.success(response))
         } catch (e: Exception) {
             e.printStackTrace()

@@ -47,4 +47,7 @@
     <string name="title_home">Home</string>
     <string name="setting">Setting</string>
     <string name="location">Location</string>
+    <string name="share_location">Share location</string>
+    <string name="location_permission_denied">Location permission not allowed</string>
+    <string name="location_permission_denied_action">Change Setting</string>
 </resources>

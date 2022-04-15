@@ -22,7 +22,6 @@ import com.artworkspace.storyapp.ui.create.CreateStoryActivity
 import com.artworkspace.storyapp.ui.main.MainActivity
 import com.artworkspace.storyapp.utils.animateVisibility
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -43,6 +42,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Using layoutInflater from activity
+        // So, the SharedElement transition can works
         _binding = FragmentHomeBinding.inflate(LayoutInflater.from(requireActivity()))
         return binding.root
     }

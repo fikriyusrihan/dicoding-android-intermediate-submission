@@ -1,13 +1,17 @@
 package com.artworkspace.storyapp.ui.location
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.artworkspace.storyapp.data.StoryRepository
+import com.artworkspace.storyapp.data.remote.response.StoriesResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class LocationViewModel : ViewModel() {
+@HiltViewModel
+class LocationViewModel @Inject constructor(private val storyRepository: StoryRepository) :
+    ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
+    fun getAllStories(token: String): Flow<Result<StoriesResponse>> =
+        storyRepository.getAllStoriesWithLocation(token)
+
 }

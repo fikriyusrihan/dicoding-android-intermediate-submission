@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.artworkspace.storyapp.data.remote.response.FileUploadResponse
+import com.artworkspace.storyapp.data.remote.response.StoriesResponse
 import com.artworkspace.storyapp.data.remote.response.Story
 import com.artworkspace.storyapp.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
@@ -32,6 +33,23 @@ class StoryRepository @Inject constructor(
                 StoryPagingSource(apiService, generateBearerToken(token))
             }
         ).flow
+    }
+
+    /**
+     * Provide latest story with its location
+     *
+     * @param token User's authentication token
+     * @return Flow
+     */
+    fun getAllStoriesWithLocation(token: String): Flow<Result<StoriesResponse>> = flow {
+        try {
+            val bearerToken = generateBearerToken(token)
+            val response = apiService.getAllStories(bearerToken, size = 30, location = 1)
+            emit(Result.success(response))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emit(Result.failure(e))
+        }
     }
 
     /**

@@ -46,4 +46,6 @@
     <string name="share_location">Bagikan lokasi</string>
     <string name="location_permission_denied">Izin lokasi ditolak</string>
     <string name="location_permission_denied_action">Ubah pengaturan</string>
+    <string name="retry">Coba lagi</string>
+    <string name="loading_error_message">Tidak dapat mengambil cerita</string>
 </resources>

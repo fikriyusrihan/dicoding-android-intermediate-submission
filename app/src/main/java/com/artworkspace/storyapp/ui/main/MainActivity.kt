@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
 
         // Add data to the adapter
-        listAdapter.submitList(stories)
+//        listAdapter.submitList(stories)
 
         // Restore last recyclerview state
         recyclerView.layoutManager?.onRestoreInstanceState(recyclerViewState)

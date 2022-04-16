@@ -1,6 +1,9 @@
 package com.artworkspace.storyapp.utils
 
 import com.artworkspace.storyapp.data.remote.response.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 object DataDummy {
     fun generateDummyStoriesResponse(): StoriesResponse {
@@ -42,6 +45,23 @@ object DataDummy {
 
     fun generateDummyRegisterResponse(): RegisterResponse {
         return RegisterResponse(
+            error = false,
+            message = "success"
+        )
+    }
+
+    fun generateDummyMultipartFile(): MultipartBody.Part {
+        val dummyText = "text"
+        return MultipartBody.Part.create(dummyText.toRequestBody())
+    }
+
+    fun generateDummyRequestBody(): RequestBody {
+        val dummyText = "text"
+        return dummyText.toRequestBody()
+    }
+
+    fun generateDummyFileUploadResponse(): FileUploadResponse {
+        return FileUploadResponse(
             error = false,
             message = "success"
         )

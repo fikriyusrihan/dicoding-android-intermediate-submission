@@ -3,6 +3,7 @@ package com.artworkspace.storyapp.ui.location
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.ExperimentalPagingApi
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.FragmentLocationsBinding
 import com.artworkspace.storyapp.ui.main.MainActivity
@@ -25,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@ExperimentalPagingApi
 @AndroidEntryPoint
 class LocationFragment : Fragment() {
 
@@ -104,8 +107,8 @@ class LocationFragment : Fragment() {
             launch {
                 locationViewModel.getAllStories(token).collect { result ->
                     result.onSuccess { response ->
-                        response.stories.forEach { story ->
-
+                        response.storyResponseItems.forEach { story ->
+                            Log.d("TAG", "markStoryLocation: $story")
                             // Verify that latitude and longitude field not null
                             if (story.lat != null && story.lon != null) {
                                 val latLng = LatLng(story.lat, story.lon)

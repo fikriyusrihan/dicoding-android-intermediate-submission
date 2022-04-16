@@ -1,11 +1,13 @@
 package com.artworkspace.storyapp.data
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.artworkspace.storyapp.data.local.entity.Story
+import com.artworkspace.storyapp.data.local.room.StoryDatabase
 import com.artworkspace.storyapp.data.remote.response.FileUploadResponse
 import com.artworkspace.storyapp.data.remote.response.StoriesResponse
-import com.artworkspace.storyapp.data.remote.response.Story
 import com.artworkspace.storyapp.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,7 +16,9 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 
 
+@ExperimentalPagingApi
 class StoryRepository @Inject constructor(
+    private val storyDatabase: StoryDatabase,
     private val apiService: ApiService,
 ) {
 
@@ -29,8 +33,13 @@ class StoryRepository @Inject constructor(
             config = PagingConfig(
                 pageSize = 10,
             ),
+            remoteMediator = StoryRemoteMediator(
+                storyDatabase,
+                apiService,
+                generateBearerToken(token)
+            ),
             pagingSourceFactory = {
-                StoryPagingSource(apiService, generateBearerToken(token))
+                storyDatabase.storyDao().getAllStories()
             }
         ).flow
     }

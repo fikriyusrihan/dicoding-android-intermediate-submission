@@ -1,5 +1,6 @@
 package com.artworkspace.storyapp.ui.create
 
+import androidx.paging.ExperimentalPagingApi
 import com.artworkspace.storyapp.data.AuthRepository
 import com.artworkspace.storyapp.data.StoryRepository
 import com.artworkspace.storyapp.data.remote.response.FileUploadResponse
@@ -17,6 +18,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
+@ExperimentalPagingApi
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class CreateViewModelTest {

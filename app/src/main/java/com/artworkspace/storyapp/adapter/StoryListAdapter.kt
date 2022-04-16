@@ -10,7 +10,7 @@ import androidx.core.util.Pair
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.artworkspace.storyapp.data.remote.response.Story
+import com.artworkspace.storyapp.data.local.entity.Story
 import com.artworkspace.storyapp.databinding.LayoutStoryItemBinding
 import com.artworkspace.storyapp.ui.detail.DetailStoryActivity
 import com.artworkspace.storyapp.ui.detail.DetailStoryActivity.Companion.EXTRA_DETAIL

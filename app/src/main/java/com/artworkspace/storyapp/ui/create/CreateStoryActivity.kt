@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.ExperimentalPagingApi
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.ActivityCreateStoryBinding
 import com.artworkspace.storyapp.utils.MediaUtility
@@ -46,6 +47,7 @@ import java.io.OutputStream
 
 
 @AndroidEntryPoint
+@ExperimentalPagingApi
 class CreateStoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateStoryBinding

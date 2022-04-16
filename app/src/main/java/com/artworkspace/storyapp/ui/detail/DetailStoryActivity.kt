@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.artworkspace.storyapp.R
-import com.artworkspace.storyapp.data.remote.response.Story
+import com.artworkspace.storyapp.data.local.entity.Story
 import com.artworkspace.storyapp.databinding.ActivityDetailStoryBinding
 import com.artworkspace.storyapp.utils.setLocalDateFormat
 import com.bumptech.glide.Glide
@@ -39,21 +39,21 @@ class DetailStoryActivity : AppCompatActivity() {
     /**
      * Parse story data to related views
      *
-     * @param story Story data to parse
+     * @param storyResponseItem Story data to parse
      */
-    private fun parseStoryData(story: Story?) {
-        if (story != null) {
+    private fun parseStoryData(storyResponseItem: Story?) {
+        if (storyResponseItem != null) {
             binding.apply {
-                tvStoryUsername.text = story.name
-                tvStoryDescription.text = story.description
-                toolbar.title = getString(R.string.detail_toolbar_title, story.name)
-                tvStoryDate.setLocalDateFormat(story.createdAt)
+                tvStoryUsername.text = storyResponseItem.name
+                tvStoryDescription.text = storyResponseItem.description
+                toolbar.title = getString(R.string.detail_toolbar_title, storyResponseItem.name)
+                tvStoryDate.setLocalDateFormat(storyResponseItem.createdAt)
 
                 // Parse image to ImageView
                 // Using listener for make sure the enter transition only called when loading completed
                 Glide
                     .with(this@DetailStoryActivity)
-                    .load(story.photoUrl)
+                    .load(storyResponseItem.photoUrl)
                     .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(
                             e: GlideException?,

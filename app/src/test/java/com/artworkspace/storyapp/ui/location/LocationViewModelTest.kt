@@ -1,5 +1,6 @@
 package com.artworkspace.storyapp.ui.location
 
+import androidx.paging.ExperimentalPagingApi
 import com.artworkspace.storyapp.data.StoryRepository
 import com.artworkspace.storyapp.data.remote.response.StoriesResponse
 import com.artworkspace.storyapp.utils.DataDummy
@@ -16,6 +17,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
+@ExperimentalPagingApi
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class LocationViewModelTest {

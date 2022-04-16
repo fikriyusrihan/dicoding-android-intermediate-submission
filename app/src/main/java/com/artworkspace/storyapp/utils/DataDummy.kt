@@ -9,10 +9,10 @@ object DataDummy {
     fun generateDummyStoriesResponse(): StoriesResponse {
         val error = false
         val message = "Stories fetched successfully"
-        val listStory = mutableListOf<Story>()
+        val listStory = mutableListOf<StoryResponseItem>()
 
         for (i in 0 until 10) {
-            val story = Story(
+            val story = StoryResponseItem(
                 id = "story-FvU4u0Vp2S3PMsFg",
                 photoUrl = "https://story-api.dicoding.dev/images/stories/photos-1641623658595_dummy-pic.png",
                 createdAt = "2022-01-08T06:34:18.598Z",

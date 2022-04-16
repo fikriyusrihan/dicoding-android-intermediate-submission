@@ -1,6 +1,7 @@
 package com.artworkspace.storyapp.ui.create
 
 import androidx.lifecycle.ViewModel
+import androidx.paging.ExperimentalPagingApi
 import com.artworkspace.storyapp.data.AuthRepository
 import com.artworkspace.storyapp.data.StoryRepository
 import com.artworkspace.storyapp.data.remote.response.FileUploadResponse
@@ -10,6 +11,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
 
+@ExperimentalPagingApi
 @HiltViewModel
 class CreateViewModel @Inject constructor(
     private val authRepository: AuthRepository,

@@ -59,6 +59,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-alpha06"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-alpha06"
 
+    // Room
+    implementation "androidx.room:room-runtime:2.4.2"
+    implementation "androidx.room:room-ktx:2.4.2"
+    implementation 'androidx.room:room-paging:2.5.0-alpha01'
+    kapt "androidx.room:room-compiler:2.4.2"
+
     // Navigation
     implementation "androidx.navigation:navigation-runtime-ktx:2.4.2"
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.2"
@@ -87,7 +93,6 @@ dependencies {
 
     // Paging3
     implementation "androidx.paging:paging-runtime-ktx:3.1.1"
-    implementation 'androidx.room:room-paging:2.5.0-alpha01'
 
     // Leak Canary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'

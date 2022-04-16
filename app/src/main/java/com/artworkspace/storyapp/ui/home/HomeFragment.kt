@@ -7,25 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.artworkspace.storyapp.adapter.LoadingStateAdapter
 import com.artworkspace.storyapp.adapter.StoryListAdapter
-import com.artworkspace.storyapp.data.remote.response.Story
+import com.artworkspace.storyapp.data.local.entity.Story
 import com.artworkspace.storyapp.databinding.FragmentHomeBinding
 import com.artworkspace.storyapp.ui.create.CreateStoryActivity
 import com.artworkspace.storyapp.ui.main.MainActivity
 import com.artworkspace.storyapp.utils.animateVisibility
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
+@ExperimentalPagingApi
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -73,13 +70,17 @@ class HomeFragment : Fragment() {
      * Get all stories data and set the related views state
      */
     private fun getAllStories() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                homeViewModel.getAllStories(token).collectLatest { result ->
-                    updateRecyclerViewData(result)
-                }
-            }
+        homeViewModel.getAllStories(token).observe(viewLifecycleOwner) { result ->
+            updateRecyclerViewData(result)
         }
+
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+//                homeViewModel.getAllStories(token).collectLatest { result ->
+//                    updateRecyclerViewData(result)
+//                }
+//            }
+//        }
     }
 
     /**

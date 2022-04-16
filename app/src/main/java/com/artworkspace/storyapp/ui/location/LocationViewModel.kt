@@ -1,6 +1,8 @@
 package com.artworkspace.storyapp.ui.location
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.artworkspace.storyapp.data.StoryRepository
 import com.artworkspace.storyapp.data.remote.response.StoriesResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,4 +16,6 @@ class LocationViewModel @Inject constructor(private val storyRepository: StoryRe
     fun getAllStories(token: String): Flow<Result<StoriesResponse>> =
         storyRepository.getAllStoriesWithLocation(token)
 
+    fun getStoriesWithLocation(token: String): LiveData<Result<StoriesResponse>> =
+        storyRepository.getAllStoriesWithLocation(token).asLiveData()
 }

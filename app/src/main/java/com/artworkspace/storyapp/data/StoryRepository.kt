@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 
 class StoryRepository @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
 ) {
 
     /**

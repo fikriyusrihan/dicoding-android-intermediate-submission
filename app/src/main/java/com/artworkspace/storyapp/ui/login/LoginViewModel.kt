@@ -3,7 +3,9 @@ package com.artworkspace.storyapp.ui.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.artworkspace.storyapp.data.AuthRepository
+import com.artworkspace.storyapp.data.remote.response.LoginResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,7 +21,7 @@ class LoginViewModel @Inject constructor(
      * @param password User's password
      * @return Flow
      */
-    suspend fun userLogin(email: String, password: String) =
+    suspend fun userLogin(email: String, password: String): Flow<Result<LoginResponse>> =
         authRepository.userLogin(email, password)
 
 

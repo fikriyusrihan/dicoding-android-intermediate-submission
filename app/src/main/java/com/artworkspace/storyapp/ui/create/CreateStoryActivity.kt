@@ -185,26 +185,37 @@ class CreateStoryActivity : AppCompatActivity() {
 
         // Required content is valid and ready to upload
         if (isValid) {
-            val file = reduceFileImage(getFile as File)
-            val description =
-                etDescription.text.toString().toRequestBody("text/plain".toMediaType())
-            val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-                "photo",
-                file.name,
-                requestImageFile
-            )
-
-            var lat: RequestBody? = null
-            var lon: RequestBody? = null
-
-            if (location != null) {
-                lat = location?.latitude.toString().toRequestBody("text/plain".toMediaType())
-                lon = location?.longitude.toString().toRequestBody("text/plain".toMediaType())
-            }
-
             lifecycleScope.launchWhenStarted {
                 launch {
+                    // Preparing required parameters before uploading data to the server
+                    // Do with coroutine so this operation not blocking the UI
+
+                    // Get description information from text field and convert to RequestBody
+                    val description =
+                        etDescription.text.toString().toRequestBody("text/plain".toMediaType())
+
+                    // Get image file and convert to MultiPart
+                    val file = reduceFileImage(getFile as File)
+                    val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                    val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                        "photo",
+                        file.name,
+                        requestImageFile
+                    )
+
+                    // Collect story location information
+                    var lat: RequestBody? = null
+                    var lon: RequestBody? = null
+
+                    if (location != null) {
+                        lat =
+                            location?.latitude.toString().toRequestBody("text/plain".toMediaType())
+                        lon =
+                            location?.longitude.toString().toRequestBody("text/plain".toMediaType())
+                    }
+
+                    // Uploading information to the server and collecting server response
+                    // Making decision based on server response
                     viewModel.uploadImage(token, imageMultipart, description, lat, lon)
                         .collect { response ->
                             response.onSuccess {
@@ -223,6 +234,7 @@ class CreateStoryActivity : AppCompatActivity() {
                         }
                 }
             }
+
         } else setLoadingState(false)
     }
 
@@ -303,6 +315,9 @@ class CreateStoryActivity : AppCompatActivity() {
                     )
                     .setActionTextColor(getColor(R.color.white))
                     .setAction(getString(R.string.location_permission_denied_action)) {
+
+                        // When user not grant permission, user need to activate the permission manually
+                        // Direct user to the application detail setting
                         Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).also { intent ->
                             val uri = Uri.fromParts("package", packageName, null)
                             intent.data = uri

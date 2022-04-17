@@ -108,8 +108,9 @@ class LocationFragment : Fragment() {
                 locationViewModel.getAllStories(token).collect { result ->
                     result.onSuccess { response ->
                         response.storyResponseItems.forEach { story ->
-                            Log.d("TAG", "markStoryLocation: $story")
+
                             // Verify that latitude and longitude field not null
+                            // Create marker on the map
                             if (story.lat != null && story.lon != null) {
                                 val latLng = LatLng(story.lat, story.lon)
 

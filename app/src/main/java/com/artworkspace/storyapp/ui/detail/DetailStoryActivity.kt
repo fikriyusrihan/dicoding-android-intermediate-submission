@@ -21,6 +21,8 @@ class DetailStoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Wait until all resource is already loaded
         supportPostponeEnterTransition()
 
         val story = intent.getParcelableExtra<Story>(EXTRA_DETAIL)
@@ -39,21 +41,21 @@ class DetailStoryActivity : AppCompatActivity() {
     /**
      * Parse story data to related views
      *
-     * @param storyResponseItem Story data to parse
+     * @param story Story data to parse
      */
-    private fun parseStoryData(storyResponseItem: Story?) {
-        if (storyResponseItem != null) {
+    private fun parseStoryData(story: Story?) {
+        if (story != null) {
             binding.apply {
-                tvStoryUsername.text = storyResponseItem.name
-                tvStoryDescription.text = storyResponseItem.description
-                toolbar.title = getString(R.string.detail_toolbar_title, storyResponseItem.name)
-                tvStoryDate.setLocalDateFormat(storyResponseItem.createdAt)
+                tvStoryUsername.text = story.name
+                tvStoryDescription.text = story.description
+                toolbar.title = getString(R.string.detail_toolbar_title, story.name)
+                tvStoryDate.setLocalDateFormat(story.createdAt)
 
                 // Parse image to ImageView
                 // Using listener for make sure the enter transition only called when loading completed
                 Glide
                     .with(this@DetailStoryActivity)
-                    .load(storyResponseItem.photoUrl)
+                    .load(story.photoUrl)
                     .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(
                             e: GlideException?,
@@ -61,6 +63,7 @@ class DetailStoryActivity : AppCompatActivity() {
                             target: Target<Drawable>?,
                             isFirstResource: Boolean
                         ): Boolean {
+                            // Continue enter animation after image loaded
                             supportStartPostponedEnterTransition()
                             return false
                         }

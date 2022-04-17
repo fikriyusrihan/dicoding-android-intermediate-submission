@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.LayoutStoryLoadingBinding
 
+/**
+ * Custom LoadStateAdapter for Paging3
+ */
 class LoadingStateAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<LoadingStateAdapter.LoadingStateViewHolder>() {
     override fun onCreateViewHolder(
@@ -29,6 +32,7 @@ class LoadingStateAdapter(private val retry: () -> Unit) :
         retry: () -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
+
         init {
             binding.retryButton.setOnClickListener { retry.invoke() }
         }

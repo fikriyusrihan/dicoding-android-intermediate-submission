@@ -16,13 +16,29 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DatabaseModule {
 
+    /**
+     * Provide StoryDao instance for Hilt
+     *
+     * @param storyDatabase Local StoryDatabase
+     */
     @Provides
     fun provideStoryDao(storyDatabase: StoryDatabase): StoryDao = storyDatabase.storyDao()
 
+    /**
+     * Provide RemoteKeysDao instance for Hilt
+     *
+     * @param storyDatabase Local StoryDatabase
+     */
     @Provides
     fun provideRemoteKeysDao(storyDatabase: StoryDatabase): RemoteKeysDao =
         storyDatabase.remoteKeysDao()
 
+
+    /**
+     * Provide StoryDatabase instance for Hilt
+     *
+     * @param context Context
+     */
     @Provides
     @Singleton
     fun provideStoryDatabase(@ApplicationContext context: Context): StoryDatabase {

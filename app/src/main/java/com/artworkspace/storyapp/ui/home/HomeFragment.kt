@@ -73,14 +73,6 @@ class HomeFragment : Fragment() {
         homeViewModel.getAllStories(token).observe(viewLifecycleOwner) { result ->
             updateRecyclerViewData(result)
         }
-
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-//                homeViewModel.getAllStories(token).collectLatest { result ->
-//                    updateRecyclerViewData(result)
-//                }
-//            }
-//        }
     }
 
     /**

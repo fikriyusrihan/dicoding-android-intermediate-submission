@@ -15,9 +15,17 @@ import javax.inject.Inject
 class LocationViewModel @Inject constructor(private val storyRepository: StoryRepository) :
     ViewModel() {
 
+    /**
+     * Get all stories with location available
+     *
+     * @param token User's authentication token
+     */
     fun getAllStories(token: String): Flow<Result<StoriesResponse>> =
         storyRepository.getAllStoriesWithLocation(token)
 
+
+    // FIXME: Determine to use LiveData or Flow.
+    // LiveData is lifecycle aware, Flow is not
     fun getStoriesWithLocation(token: String): LiveData<Result<StoriesResponse>> =
         storyRepository.getAllStoriesWithLocation(token).asLiveData()
 }

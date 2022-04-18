@@ -98,6 +98,7 @@ dependencies {
 
     // IdlingResource
     implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
 
     // Mockito
     testImplementation 'org.mockito:mockito-core:3.12.4'
@@ -111,14 +112,17 @@ dependencies {
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
     androidTestImplementation "com.squareup.okhttp3:okhttp-tls:4.9.3"
 
+    // Hilt Testing
+    kaptTest 'com.google.dagger:hilt-android-compiler:2.41'
+    testImplementation 'com.google.dagger:hilt-android-testing:2.41'
+
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.41'
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.41'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
-    // Hilt Testing
-    testImplementation 'com.google.dagger:hilt-android-testing:2.41'
-    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.41'
-    kaptTest 'com.google.dagger:hilt-android-compiler:2.41'
-    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.41'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
 
     debugImplementation "androidx.fragment:fragment-testing:1.4.1"
 }

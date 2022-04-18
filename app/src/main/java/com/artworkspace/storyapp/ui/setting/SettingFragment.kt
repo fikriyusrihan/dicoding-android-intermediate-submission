@@ -67,7 +67,11 @@ class SettingFragment : Fragment() {
                     startActivity(intent)
                     requireActivity().finish()
                 }
-                Toast.makeText(requireContext(), getString(R.string.logout_message_success), Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.logout_message_success),
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
             .show()

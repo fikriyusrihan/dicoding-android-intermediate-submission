@@ -1,8 +1,6 @@
 package com.artworkspace.storyapp.ui.location
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.paging.ExperimentalPagingApi
 import com.artworkspace.storyapp.data.StoryRepository
 import com.artworkspace.storyapp.data.remote.response.StoriesResponse

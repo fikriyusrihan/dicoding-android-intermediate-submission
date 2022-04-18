@@ -8,7 +8,6 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.LayoutStoryLoadingBinding
-import com.artworkspace.storyapp.utils.EspressoIdlingResource
 
 /**
  * Custom LoadStateAdapter for Paging3

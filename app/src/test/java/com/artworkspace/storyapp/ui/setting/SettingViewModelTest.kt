@@ -1,7 +1,7 @@
 package com.artworkspace.storyapp.ui.setting
 
-import com.artworkspace.storyapp.CoroutinesTestRule
 import com.artworkspace.storyapp.data.AuthRepository
+import com.artworkspace.storyapp.utils.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before

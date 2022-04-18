@@ -1,8 +1,8 @@
 package com.artworkspace.storyapp.data
 
-import com.artworkspace.storyapp.CoroutinesTestRule
 import com.artworkspace.storyapp.data.local.AuthPreferencesDataSource
 import com.artworkspace.storyapp.data.remote.retrofit.ApiService
+import com.artworkspace.storyapp.utils.CoroutinesTestRule
 import com.artworkspace.storyapp.utils.DataDummy
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf

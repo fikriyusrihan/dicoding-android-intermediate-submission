@@ -6,12 +6,12 @@ import androidx.paging.AsyncPagingDataDiffer
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.ListUpdateCallback
-import com.artworkspace.storyapp.CoroutinesTestRule
-import com.artworkspace.storyapp.PagedTestDataSource
 import com.artworkspace.storyapp.adapter.StoryListAdapter
 import com.artworkspace.storyapp.data.local.entity.Story
-import com.artworkspace.storyapp.getOrAwaitValue
+import com.artworkspace.storyapp.utils.CoroutinesTestRule
 import com.artworkspace.storyapp.utils.DataDummy
+import com.artworkspace.storyapp.utils.PagedTestDataSource
+import com.artworkspace.storyapp.utils.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest

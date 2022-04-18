@@ -1,8 +1,8 @@
 package com.artworkspace.storyapp.ui.login
 
-import com.artworkspace.storyapp.CoroutinesTestRule
 import com.artworkspace.storyapp.data.AuthRepository
 import com.artworkspace.storyapp.data.remote.response.LoginResponse
+import com.artworkspace.storyapp.utils.CoroutinesTestRule
 import com.artworkspace.storyapp.utils.DataDummy
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow

@@ -1,4 +1,4 @@
-package com.artworkspace.storyapp
+package com.artworkspace.storyapp.utils
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingData

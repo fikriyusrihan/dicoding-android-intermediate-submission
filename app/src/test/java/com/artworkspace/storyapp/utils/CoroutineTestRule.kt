@@ -1,4 +1,4 @@
-package com.artworkspace.storyapp
+package com.artworkspace.storyapp.utils
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

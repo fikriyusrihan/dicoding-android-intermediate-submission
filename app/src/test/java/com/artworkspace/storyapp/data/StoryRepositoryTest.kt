@@ -3,12 +3,13 @@ package com.artworkspace.storyapp.data
 import androidx.paging.AsyncPagingDataDiffer
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.ListUpdateCallback
-import com.artworkspace.storyapp.CoroutinesTestRule
-import com.artworkspace.storyapp.PagedTestDataSource
 import com.artworkspace.storyapp.adapter.StoryListAdapter
 import com.artworkspace.storyapp.data.local.room.StoryDatabase
+import com.artworkspace.storyapp.data.remote.response.StoriesResponse
 import com.artworkspace.storyapp.data.remote.retrofit.ApiService
+import com.artworkspace.storyapp.utils.CoroutinesTestRule
 import com.artworkspace.storyapp.utils.DataDummy
+import com.artworkspace.storyapp.utils.PagedTestDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -38,6 +39,7 @@ class StoryRepositoryTest {
 
     @Mock
     private lateinit var storyRepositoryMock: StoryRepository
+
     private lateinit var storyRepository: StoryRepository
 
     private val dummyToken = "authentication_token"
@@ -79,37 +81,30 @@ class StoryRepositoryTest {
 
     @Test
     fun `Get stories with location - successfully`() = runTest {
-        val expectedResponse = DataDummy.generateDummyStoriesResponse()
+        val expectedResult = flowOf(Result.success(dummyStoriesResponse))
 
-        `when`(apiService.getAllStories(dummyToken.generateBearerToken(), null, 30, 1)).thenReturn(
-            expectedResponse
-        )
+        `when`(storyRepositoryMock.getAllStoriesWithLocation(dummyToken)).thenReturn(expectedResult)
 
-        storyRepository.getAllStoriesWithLocation(dummyToken).collect { result ->
+        storyRepositoryMock.getAllStoriesWithLocation(dummyToken).collect { result ->
             Assert.assertTrue(result.isSuccess)
             Assert.assertFalse(result.isFailure)
 
             result.onSuccess { actualResponse ->
                 Assert.assertNotNull(actualResponse)
-                Assert.assertEquals(expectedResponse, actualResponse)
+                Assert.assertEquals(dummyStoriesResponse, actualResponse)
             }
         }
-
-        Mockito.verify(apiService).getAllStories(dummyToken.generateBearerToken(), null, 30, 1)
     }
 
     @Test
     fun `Get stories with location - throw exception`() = runTest {
-        `when`(
-            apiService.getAllStories(
-                dummyToken.generateBearerToken(),
-                null,
-                30,
-                1
-            )
-        ).then { throw Exception() }
+        val expectedResponse = flowOf<Result<StoriesResponse>>(Result.failure(Exception("failed")))
 
-        storyRepository.getAllStoriesWithLocation(dummyToken).collect { result ->
+        `when`(storyRepositoryMock.getAllStoriesWithLocation(dummyToken)).thenReturn(
+            expectedResponse
+        )
+
+        storyRepositoryMock.getAllStoriesWithLocation(dummyToken).collect { result ->
             Assert.assertFalse(result.isSuccess)
             Assert.assertTrue(result.isFailure)
 
@@ -117,8 +112,6 @@ class StoryRepositoryTest {
                 Assert.assertNotNull(it)
             }
         }
-
-        Mockito.verify(apiService).getAllStories(dummyToken.generateBearerToken(), null, 30, 1)
     }
 
     @Test

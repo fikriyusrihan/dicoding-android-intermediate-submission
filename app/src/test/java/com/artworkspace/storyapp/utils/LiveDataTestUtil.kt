@@ -1,4 +1,4 @@
-package com.artworkspace.storyapp
+package com.artworkspace.storyapp.utils
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData

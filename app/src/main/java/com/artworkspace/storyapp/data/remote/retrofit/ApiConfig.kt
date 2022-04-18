@@ -9,6 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object {
+
+        var API_BASE_URL_MOCK: String? = null
+
         /**
          * API service provider
          *
@@ -26,7 +29,7 @@ class ApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
+                .baseUrl(API_BASE_URL_MOCK ?: API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

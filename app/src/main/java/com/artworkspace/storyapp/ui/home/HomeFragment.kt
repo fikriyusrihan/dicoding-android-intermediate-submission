@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        token = requireActivity().intent.getStringExtra(MainActivity.EXTRA_TOKEN)!!
+        token = requireActivity().intent.getStringExtra(MainActivity.EXTRA_TOKEN) ?: ""
 
         setSwipeRefreshLayout()
         setRecyclerView()

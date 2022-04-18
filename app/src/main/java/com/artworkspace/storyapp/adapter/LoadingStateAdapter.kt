@@ -8,6 +8,7 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.artworkspace.storyapp.R
 import com.artworkspace.storyapp.databinding.LayoutStoryLoadingBinding
+import com.artworkspace.storyapp.utils.EspressoIdlingResource
 
 /**
  * Custom LoadStateAdapter for Paging3
@@ -42,6 +43,7 @@ class LoadingStateAdapter(private val retry: () -> Unit) :
                 binding.errorMsg.text =
                     binding.root.context.getString(R.string.loading_error_message)
             }
+
             binding.progressBar.isVisible = loadState is LoadState.Loading
             binding.retryButton.isVisible = loadState is LoadState.Error
             binding.errorMsg.isVisible = loadState is LoadState.Error

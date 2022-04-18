@@ -74,7 +74,7 @@ class LocationFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
 
-        token = requireActivity().intent.getStringExtra(MainActivity.EXTRA_TOKEN)!!
+        token = requireActivity().intent.getStringExtra(MainActivity.EXTRA_TOKEN) ?: ""
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
     }

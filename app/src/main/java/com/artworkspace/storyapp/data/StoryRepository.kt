@@ -10,6 +10,7 @@ import com.artworkspace.storyapp.data.remote.StoryRemoteMediator
 import com.artworkspace.storyapp.data.remote.response.FileUploadResponse
 import com.artworkspace.storyapp.data.remote.response.StoriesResponse
 import com.artworkspace.storyapp.data.remote.retrofit.ApiService
+import com.artworkspace.storyapp.utils.wrapEspressoIdlingResource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
@@ -52,13 +53,15 @@ class StoryRepository @Inject constructor(
      * @return Flow
      */
     fun getAllStoriesWithLocation(token: String): Flow<Result<StoriesResponse>> = flow {
-        try {
-            val bearerToken = generateBearerToken(token)
-            val response = apiService.getAllStories(bearerToken, size = 30, location = 1)
-            emit(Result.success(response))
-        } catch (e: Exception) {
-            e.printStackTrace()
-            emit(Result.failure(e))
+        wrapEspressoIdlingResource {
+            try {
+                val bearerToken = generateBearerToken(token)
+                val response = apiService.getAllStories(bearerToken, size = 30, location = 1)
+                emit(Result.success(response))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emit(Result.failure(e))
+            }
         }
     }
 

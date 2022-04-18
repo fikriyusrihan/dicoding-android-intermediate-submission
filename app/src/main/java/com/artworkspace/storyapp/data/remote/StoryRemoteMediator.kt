@@ -9,6 +9,7 @@ import com.artworkspace.storyapp.data.local.entity.RemoteKeys
 import com.artworkspace.storyapp.data.local.entity.Story
 import com.artworkspace.storyapp.data.local.room.StoryDatabase
 import com.artworkspace.storyapp.data.remote.retrofit.ApiService
+import com.artworkspace.storyapp.utils.wrapEspressoIdlingResource
 
 @ExperimentalPagingApi
 class StoryRemoteMediator(
@@ -41,47 +42,49 @@ class StoryRemoteMediator(
             }
         }
 
-        try {
-            val responseData = apiService.getAllStories(token, page, state.config.pageSize)
-            val endOfPaginationReached = responseData.storyResponseItems.isEmpty()
+        wrapEspressoIdlingResource {
+            try {
+                val responseData = apiService.getAllStories(token, page, state.config.pageSize)
+                val endOfPaginationReached = responseData.storyResponseItems.isEmpty()
 
-            database.withTransaction {
-                if (loadType == LoadType.REFRESH) {
-                    database.remoteKeysDao().deleteRemoteKeys()
-                    database.storyDao().deleteAll()
+                database.withTransaction {
+                    if (loadType == LoadType.REFRESH) {
+                        database.remoteKeysDao().deleteRemoteKeys()
+                        database.storyDao().deleteAll()
+                    }
+
+                    val prevKey = if (page == 1) null else page - 1
+                    val nextKey = if (endOfPaginationReached) null else page + 1
+                    val keys = responseData.storyResponseItems.map {
+                        RemoteKeys(id = it.id, prevKey = prevKey, nextKey = nextKey)
+                    }
+
+                    // Save RemoteKeys information to database
+                    database.remoteKeysDao().insertAll(keys)
+
+                    // Convert StoryResponseItem class to Story class
+                    // We need to convert because the response from API is different from local database Entity
+                    responseData.storyResponseItems.forEach { storyResponseItem ->
+                        val story = Story(
+                            storyResponseItem.id,
+                            storyResponseItem.name,
+                            storyResponseItem.description,
+                            storyResponseItem.createdAt,
+                            storyResponseItem.photoUrl,
+                            storyResponseItem.lon,
+                            storyResponseItem.lat
+                        )
+
+                        // Save Story to the local database
+                        database.storyDao().insertStory(story)
+                    }
                 }
 
-                val prevKey = if (page == 1) null else page - 1
-                val nextKey = if (endOfPaginationReached) null else page + 1
-                val keys = responseData.storyResponseItems.map {
-                    RemoteKeys(id = it.id, prevKey = prevKey, nextKey = nextKey)
-                }
+                return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
 
-                // Save RemoteKeys information to database
-                database.remoteKeysDao().insertAll(keys)
-
-                // Convert StoryResponseItem class to Story class
-                // We need to convert because the response from API is different from local database Entity
-                responseData.storyResponseItems.forEach { storyResponseItem ->
-                    val story = Story(
-                        storyResponseItem.id,
-                        storyResponseItem.name,
-                        storyResponseItem.description,
-                        storyResponseItem.createdAt,
-                        storyResponseItem.photoUrl,
-                        storyResponseItem.lon,
-                        storyResponseItem.lat
-                    )
-
-                    // Save Story to the local database
-                    database.storyDao().insertStory(story)
-                }
+            } catch (e: Exception) {
+                return MediatorResult.Error(e)
             }
-
-            return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
-
-        } catch (e: Exception) {
-            return MediatorResult.Error(e)
         }
     }
 

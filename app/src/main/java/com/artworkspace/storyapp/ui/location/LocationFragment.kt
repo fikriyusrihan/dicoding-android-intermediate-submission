@@ -22,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -56,6 +57,7 @@ class LocationFragment : Fragment() {
         }
 
         getDeviceLocation()
+        setMapStyle()
         markStoryLocation()
     }
 
@@ -95,6 +97,22 @@ class LocationFragment : Fragment() {
 
         } else {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+    }
+
+    /**
+     * Set custom map style to the google map
+     */
+    private fun setMapStyle() {
+        try {
+            mMap.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(
+                    requireContext(),
+                    R.raw.map_style
+                )
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 

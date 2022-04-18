@@ -26,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var listAdapter: StoryListAdapter
@@ -38,11 +38,11 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Using layoutInflater from activity
         // So, the SharedElement transition can works
         _binding = FragmentHomeBinding.inflate(LayoutInflater.from(requireActivity()))
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
         setRecyclerView()
         getAllStories()
 
-        binding.fabCreateStory.setOnClickListener {
+        binding?.fabCreateStory?.setOnClickListener {
             Intent(requireContext(), CreateStoryActivity::class.java).also { intent ->
                 startActivity(intent)
             }
@@ -79,7 +79,7 @@ class HomeFragment : Fragment() {
      * Set the SwipeRefreshLayout state
      */
     private fun setSwipeRefreshLayout() {
-        binding.swipeRefresh.setOnRefreshListener {
+        binding?.swipeRefresh?.setOnRefreshListener {
             getAllStories()
         }
     }
@@ -96,14 +96,14 @@ class HomeFragment : Fragment() {
         listAdapter.addLoadStateListener { loadState ->
             if ((loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && listAdapter.itemCount < 1) || loadState.source.refresh is LoadState.Error) {
                 // List empty or error
-                binding.apply {
+                binding?.apply {
                     tvNotFoundError.animateVisibility(true)
                     ivNotFoundError.animateVisibility(true)
                     rvStories.animateVisibility(false)
                 }
             } else {
                 // List not empty
-                binding.apply {
+                binding?.apply {
                     tvNotFoundError.animateVisibility(false)
                     ivNotFoundError.animateVisibility(false)
                     rvStories.animateVisibility(true)
@@ -111,17 +111,21 @@ class HomeFragment : Fragment() {
             }
 
             // SwipeRefresh status based on LoadState
-            binding.swipeRefresh.isRefreshing = loadState.source.refresh is LoadState.Loading
+            binding?.swipeRefresh?.isRefreshing = loadState.source.refresh is LoadState.Loading
         }
 
-        recyclerView = binding.rvStories
-        recyclerView.apply {
-            adapter = listAdapter.withLoadStateFooter(
-                footer = LoadingStateAdapter {
-                    listAdapter.retry()
-                }
-            )
-            layoutManager = linearLayoutManager
+        try {
+            recyclerView = binding?.rvStories!!
+            recyclerView.apply {
+                adapter = listAdapter.withLoadStateFooter(
+                    footer = LoadingStateAdapter {
+                        listAdapter.retry()
+                    }
+                )
+                layoutManager = linearLayoutManager
+            }
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
         }
     }
 

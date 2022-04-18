@@ -3,7 +3,6 @@
 buildscript {
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.41'
-        classpath "org.jacoco:org.jacoco.core:0.8.5"
     }
 }
 plugins {

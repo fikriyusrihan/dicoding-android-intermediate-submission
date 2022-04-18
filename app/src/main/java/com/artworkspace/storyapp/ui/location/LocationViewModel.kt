@@ -22,10 +22,4 @@ class LocationViewModel @Inject constructor(private val storyRepository: StoryRe
      */
     fun getAllStories(token: String): Flow<Result<StoriesResponse>> =
         storyRepository.getAllStoriesWithLocation(token)
-
-
-    // FIXME: Determine to use LiveData or Flow.
-    // LiveData is lifecycle aware, Flow is not
-    fun getStoriesWithLocation(token: String): LiveData<Result<StoriesResponse>> =
-        storyRepository.getAllStoriesWithLocation(token).asLiveData()
 }

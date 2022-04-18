@@ -41,7 +41,7 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun `Login successfully - Flow`(): Unit = runTest {
+    fun `Login successfully - result success`(): Unit = runTest {
         val expectedResponse = flow {
             emit(Result.success(dummyLoginResponse))
         }
@@ -63,7 +63,7 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun `Login failed - Flow`(): Unit = runTest {
+    fun `Login failed - result failure with exception`(): Unit = runTest {
         val expectedResponse: Flow<Result<LoginResponse>> =
             flowOf(Result.failure(Exception("login failed")))
 

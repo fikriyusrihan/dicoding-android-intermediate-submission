@@ -35,7 +35,7 @@ class LocationViewModelTest {
     }
 
     @Test
-    fun `Get story with location successfully - Flow`(): Unit = runTest {
+    fun `Get story with location successfully - result success`(): Unit = runTest {
 
         val expectedResponse = flowOf(Result.success(dummyStoriesResponse))
 
@@ -56,7 +56,7 @@ class LocationViewModelTest {
     }
 
     @Test
-    fun `Get story with location failed - Flow`(): Unit = runTest {
+    fun `Get story with location failed - result failure with exception`(): Unit = runTest {
 
         val expectedResponse: Flow<Result<StoriesResponse>> =
             flowOf(Result.failure(Exception("Failed")))

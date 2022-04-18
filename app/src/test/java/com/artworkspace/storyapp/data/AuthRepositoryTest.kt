@@ -26,6 +26,8 @@ class AuthRepositoryTest {
 
     @Mock
     private lateinit var preferencesDataSource: AuthPreferencesDataSource
+
+    @Mock
     private lateinit var apiService: ApiService
     private lateinit var authRepository: AuthRepository
 
@@ -36,13 +38,14 @@ class AuthRepositoryTest {
 
     @Before
     fun setup() {
-        apiService = FakeApiService()
         authRepository = AuthRepository(apiService, preferencesDataSource)
     }
 
     @Test
     fun `User login successfully`(): Unit = runTest {
         val expectedResponse = DataDummy.generateDummyLoginResponse()
+
+        `when`(apiService.userLogin(dummyEmail, dummyPassword)).thenReturn(expectedResponse)
 
         authRepository.userLogin(dummyEmail, dummyPassword).collect { result ->
             Assert.assertTrue(result.isSuccess)
@@ -61,8 +64,26 @@ class AuthRepositoryTest {
     }
 
     @Test
+    fun `User login failed - throw exception`(): Unit = runTest {
+        `when`(apiService.userLogin(dummyEmail, dummyPassword)).then { throw Exception() }
+
+        authRepository.userLogin(dummyEmail, dummyPassword).collect { result ->
+            Assert.assertFalse(result.isSuccess)
+            Assert.assertTrue(result.isFailure)
+
+            result.onFailure {
+                Assert.assertNotNull(it)
+            }
+        }
+    }
+
+    @Test
     fun `User register successfully`(): Unit = runTest {
         val expectedResponse = DataDummy.generateDummyRegisterResponse()
+
+        `when`(apiService.userRegister(dummyName, dummyEmail, dummyPassword)).thenReturn(
+            expectedResponse
+        )
 
         authRepository.userRegister(dummyName, dummyEmail, dummyPassword).collect { result ->
             Assert.assertTrue(result.isSuccess)
@@ -75,6 +96,26 @@ class AuthRepositoryTest {
 
             result.onFailure {
                 Assert.assertNull(it)
+            }
+        }
+    }
+
+    @Test
+    fun `User register failed - throw exception`(): Unit = runTest {
+        `when`(
+            apiService.userRegister(
+                dummyName,
+                dummyEmail,
+                dummyPassword
+            )
+        ).then { throw Exception() }
+
+        authRepository.userRegister(dummyName, dummyEmail, dummyPassword).collect { result ->
+            Assert.assertFalse(result.isSuccess)
+            Assert.assertTrue(result.isFailure)
+
+            result.onFailure {
+                Assert.assertNotNull(it)
             }
         }
     }

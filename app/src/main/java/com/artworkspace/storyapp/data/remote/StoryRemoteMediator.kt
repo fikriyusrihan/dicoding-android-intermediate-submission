@@ -1,4 +1,4 @@
-package com.artworkspace.storyapp.data
+package com.artworkspace.storyapp.data.remote
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -73,7 +73,7 @@ class StoryRemoteMediator(
                         storyResponseItem.lat
                     )
 
-                    // Save Story to the local dabatase
+                    // Save Story to the local database
                     database.storyDao().insertStory(story)
                 }
             }

@@ -35,7 +35,7 @@ class RegisterViewModelTest {
     }
 
     @Test
-    fun `Registration successfully - Flow`(): Unit = runTest {
+    fun `Registration successfully - result success`(): Unit = runTest {
         val expectedResponse = flowOf(Result.success(dummyRegisterResponse))
 
         `when`(registerViewModel.userRegister(dummyName, dummyEmail, dummyPassword)).thenReturn(
@@ -57,7 +57,7 @@ class RegisterViewModelTest {
     }
 
     @Test
-    fun `Registration failed - Flow`(): Unit = runTest {
+    fun `Registration failed - result with exception`(): Unit = runTest {
         val expectedResponse: Flow<Result<RegisterResponse>> =
             flowOf(Result.failure(Exception("failed")))
 

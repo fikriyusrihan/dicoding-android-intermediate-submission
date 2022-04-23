@@ -3,10 +3,21 @@
     package="com.artworkspace.storyapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data android:scheme="https" />
+        </intent>
+    </queries>
 
     <application
         android:name=".BaseApplication"
@@ -15,7 +26,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.StoryApp">
+        android:theme="@style/Theme.StoryApp"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".utils.HiltTestActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home" />
         <activity
             android:name=".ui.create.CreateStoryActivity"
             android:exported="false" />
@@ -31,9 +55,6 @@
         <activity
             android:name=".ui.auth.AuthActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:exported="true" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
@@ -55,13 +76,5 @@
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
-
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="https" />
-        </intent>
-    </queries>
 
 </manifest>

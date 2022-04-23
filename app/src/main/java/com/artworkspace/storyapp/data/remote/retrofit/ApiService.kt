@@ -50,8 +50,9 @@ interface ApiService {
     @GET("stories")
     suspend fun getAllStories(
         @Header("Authorization") token: String,
-        @Query("page") page: Int?,
-        @Query("size") size: Int?
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null,
+        @Query("location") location: Int? = null
     ): StoriesResponse
 
     /**
@@ -60,12 +61,16 @@ interface ApiService {
      * @param token User's authentication token
      * @param file Multipart image
      * @param description Image description
+     * @param lat Latitude
+     * @param lon Longitude
      */
     @Multipart
     @POST("stories")
     suspend fun uploadImage(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
-        @Part("description") description: RequestBody
+        @Part("description") description: RequestBody,
+        @Part("lat") lat: RequestBody?,
+        @Part("lon") lon: RequestBody?
     ): FileUploadResponse
 }

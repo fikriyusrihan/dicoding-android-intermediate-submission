@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.artworkspace.storyapp.R
-import com.artworkspace.storyapp.data.remote.response.Story
+import com.artworkspace.storyapp.data.local.entity.Story
 import com.artworkspace.storyapp.databinding.ActivityDetailStoryBinding
 import com.artworkspace.storyapp.utils.setLocalDateFormat
 import com.bumptech.glide.Glide
@@ -21,6 +21,8 @@ class DetailStoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Wait until all resource is already loaded
         supportPostponeEnterTransition()
 
         val story = intent.getParcelableExtra<Story>(EXTRA_DETAIL)
@@ -61,6 +63,7 @@ class DetailStoryActivity : AppCompatActivity() {
                             target: Target<Drawable>?,
                             isFirstResource: Boolean
                         ): Boolean {
+                            // Continue enter animation after image loaded
                             supportStartPostponedEnterTransition()
                             return false
                         }

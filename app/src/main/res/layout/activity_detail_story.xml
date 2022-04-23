@@ -17,6 +17,7 @@
         app:titleTextColor="@color/dark_blue_500" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

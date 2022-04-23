@@ -280,8 +280,18 @@ class CreateStoryActivity : AppCompatActivity() {
         ) {
             // Location permission granted
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                this.location = location
-                Log.d(TAG, "getLastLocation: ${location.latitude}, ${location.longitude}")
+                if (location != null) {
+                    this.location = location
+                    Log.d(TAG, "getLastLocation: ${location.latitude}, ${location.longitude}")
+                } else {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.please_activate_location_message),
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    binding.switchLocation.isChecked = false
+                }
             }
         } else {
             // Location permission denied
